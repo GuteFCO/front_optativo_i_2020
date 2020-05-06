@@ -1,3 +1,16 @@
+Para instalar las dependencias del proyecto deben ingresar al directorio del mismo y ejecutar
+
+### `yarn install`
+
+Para iniciar el proyecto
+
+### `yarn start`
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
