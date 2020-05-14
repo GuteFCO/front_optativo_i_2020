@@ -6,7 +6,7 @@ export default function Content(props) {
 
   return (
     <section>
-      <div class="tarjeta">
+      <div className="tarjeta">
         <header>
           <h3>{title}</h3>
         </header>

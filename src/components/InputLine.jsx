@@ -1,8 +1,20 @@
 import React from 'react';
+import LineField from './LineField';
 
 
 export default function InputLine(props){
-  const { label, type, placeholder, required } = props;
+  const {
+    label,
+    type,
+    placeholder,
+    required,
+    minLength,
+    maxLength,
+    min,
+    max,
+    step,
+    list
+  } = props;
   /*
   const label = props.label;
   const type = props.type;
@@ -10,10 +22,29 @@ export default function InputLine(props){
   const required = props.required;
   */
 
+  /*
+  list={list && list.id}
+
+  list={if(list) { return list.id }}
+  */
+
   return (
-    <div>
-      <label>{label}</label>
-      <input type={type} placeholder={placeholder} required={required} />
-    </div>
+    <LineField label={label}>
+      <input
+        type={type}
+        placeholder={placeholder}
+        minLength={minLength}
+        maxLength={maxLength}
+        min={min}
+        max={max}
+        step={step}
+        list={list && list.id}
+        required={required} />
+      {list &&
+        <datalist id={list.id}>
+          {list.options.map((option, key) => <option key={key}>{option}</option>)}
+        </datalist>
+      }
+    </LineField>
   );
 }
