@@ -13,7 +13,9 @@ export default function InputLine(props){
     min,
     max,
     step,
-    list
+    list,
+    onChange,
+    name
   } = props;
   /*
   const label = props.label;
@@ -39,7 +41,8 @@ export default function InputLine(props){
         max={max}
         step={step}
         list={list && list.id}
-        required={required} />
+        required={required}
+        onChange={(event) => onChange(name, event)} />
       {list &&
         <datalist id={list.id}>
           {list.options.map((option, key) => <option key={key}>{option}</option>)}
