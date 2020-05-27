@@ -15,7 +15,8 @@ export default function InputLine(props){
     step,
     list,
     onChange,
-    name
+    name,
+    error
   } = props;
   /*
   const label = props.label;
@@ -30,6 +31,7 @@ export default function InputLine(props){
   list={if(list) { return list.id }}
   */
 
+
   return (
     <LineField label={label}>
       <input
@@ -42,7 +44,8 @@ export default function InputLine(props){
         step={step}
         list={list && list.id}
         required={required}
-        onChange={(event) => onChange(name, event)} />
+        onChange={(event) => onChange(name, event)}
+        className={error ? 'inputError' : undefined } />
       {list &&
         <datalist id={list.id}>
           {list.options.map((option, key) => <option key={key}>{option}</option>)}
