@@ -1,5 +1,6 @@
 import React from 'react';
-import InputLine from './InputLine';
+import InputLine from '../components/InputLine';
+import { validatePassword, validateEmail } from '../utils/validations';
 
 
 export default class LoginForm extends React.Component {
@@ -14,20 +15,10 @@ export default class LoginForm extends React.Component {
     }
   };
 
-  isEmpty = (value) => {
-    return value.trim() === '';
-
-    /*if (value === '') {
-      return true;
-    } else {
-      return false;
-    }*/
-  }
-
   doLogin = (event) => {
     const { email, password } = this.state.loginData;
-    const emailError = this.isEmpty(email);
-    const passwordError = this.isEmpty(password);
+    const emailError = !validateEmail(email);
+    const passwordError = !validatePassword(password, email);
 
     this.setState({
       errors: {
@@ -49,6 +40,7 @@ export default class LoginForm extends React.Component {
   }
 
   render() {
+    const { email, password } = this.state.loginData;
     const { errors } = this.state;
 
     return (
@@ -59,6 +51,7 @@ export default class LoginForm extends React.Component {
           type="text"
           onChange={this.onChange}
           error={errors.email}
+          value={email}
         />
         <InputLine
           name="password"
@@ -66,6 +59,7 @@ export default class LoginForm extends React.Component {
           type="password"
           onChange={this.onChange}
           error={errors.password}
+          value={password}
         />
         <button onClick={this.doLogin}>Ingresar</button>
       </form>

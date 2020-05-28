@@ -2,25 +2,22 @@ import React from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Content from '../components/Content';
-import LoginForm from '../containers/LoginForm';
+import ContactForm from '../containers/ContactForm';
 
 
 const links = [
+  {href: 'login', title: 'Ingresar'},
   {href: 'register', title: 'Registrarse'},
-  {href: 'contact', title: 'Contacto'}
 ];
 
-
-function Login() {
+export default function Contact(){
   return (
     <>
       <NavBar links={links} />
-      <Content title="Ingresar">
-        <LoginForm />
+      <Content title="Cont&aacute;ctenos">
+        <ContactForm />
       </Content>
       <Footer />
     </>
   );
 }
-
-export default Login;

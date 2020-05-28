@@ -1,8 +1,9 @@
 import React from 'react';
-import InputLine from './InputLine';
-import SelectLine from './SelectLine';
-import TextareaLine from './TextareaLine';
-import OutputLine from './OutputLine';
+import InputLine from '../components/InputLine';
+import SelectLine from '../components/SelectLine';
+import TextareaLine from '../components/TextareaLine';
+import OutputLine from '../components/OutputLine';
+import { validateEmail, isEmpty } from '../utils/validations';
 
 
 const browsers = [
@@ -43,10 +44,6 @@ export default class RegisterForm extends React.Component {
     }
   };
 
-  isEmpty = (value) => {
-    return value.trim() === '';
-  }
-
   onChange = (name, event) => {
     const value = event.target.value;
     const registerData = Object.assign({}, this.state.registerData);
@@ -54,6 +51,18 @@ export default class RegisterForm extends React.Component {
     this.setState({
       registerData
     });
+  }
+
+  validateConfirmation = (value, compareValue) => {
+    if (this.isEmpty(value)) {
+      return false;
+    }
+
+    if (value !== compareValue) {
+      return false;
+    }
+
+    return true;
   }
 
   doRegister = (event) => {
@@ -67,13 +76,13 @@ export default class RegisterForm extends React.Component {
       language
     } = this.state.registerData;
 
-    const emailError = this.isEmpty(email);
-    const passwordError = this.isEmpty(password);
-    const confirmationError = this.isEmpty(confirmation);
-    const browserError = this.isEmpty(browser);
-    const ageError = this.isEmpty(age);
-    const descriptionError = this.isEmpty(description);
-    const languageError = this.isEmpty(language);
+    const emailError = !validateEmail(email);
+    const passwordError = isEmpty(password);
+    const confirmationError = !this.validateConfirmation(confirmation, password);
+    const browserError = isEmpty(browser);
+    const ageError = isEmpty(age);
+    const descriptionError = isEmpty(description);
+    const languageError = isEmpty(language);
 
     this.setState({
       errors: {
@@ -113,6 +122,7 @@ export default class RegisterForm extends React.Component {
           required={true}
           onChange={this.onChange}
           error={errors.email}
+          value={email}
         />
         <InputLine
           name="password"
@@ -123,6 +133,7 @@ export default class RegisterForm extends React.Component {
           maxLength="8"
           onChange={this.onChange}
           error={errors.password}
+          value={password}
         />
         <InputLine
           name="confirmation"
@@ -133,6 +144,7 @@ export default class RegisterForm extends React.Component {
           maxLength="8"
           onChange={this.onChange}
           error={errors.confirmation}
+          value={confirmation}
         />
         <SelectLine
           name="browser"
@@ -141,6 +153,7 @@ export default class RegisterForm extends React.Component {
           required={true}
           onChange={this.onChange}
           error={errors.browser}
+          value={browser}
         />
         <InputLine
           name="age"
@@ -152,6 +165,7 @@ export default class RegisterForm extends React.Component {
           required={true}
           onChange={this.onChange}
           error={errors.age}
+          value={age}
         />
         <TextareaLine
           name="description"
@@ -160,6 +174,7 @@ export default class RegisterForm extends React.Component {
           placeholder="Texto ejemplo"
           onChange={this.onChange}
           error={errors.description}
+          value={description}
         />
         <InputLine
           name="language"
@@ -169,6 +184,7 @@ export default class RegisterForm extends React.Component {
           required={true}
           onChange={this.onChange}
           error={errors.language}
+          value={language}
         />
         <OutputLine
           name="currentDate"
