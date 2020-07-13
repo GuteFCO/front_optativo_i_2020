@@ -12,12 +12,12 @@ const links = [
 ];
 
 
-function Register() {
+function Register(props) {
   return (
     <>
       <NavBar links={links} />
       <Content title="Registro">
-        <RegisterForm />
+        <RegisterForm {...props} />
       </Content>
       <Footer />
     </>

@@ -10,12 +10,12 @@ const links = [
   {href: 'register', title: 'Registrarse'},
 ];
 
-export default function Contact(){
+export default function Contact(props){
   return (
     <>
       <NavBar links={links} />
       <Content title="Cont&aacute;ctenos">
-        <ContactForm />
+        <ContactForm {...props} />
       </Content>
       <Footer />
     </>

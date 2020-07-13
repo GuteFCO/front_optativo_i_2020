@@ -11,12 +11,12 @@ const links = [
 ];
 
 
-function Login() {
+function Login(props) {
   return (
     <>
       <NavBar links={links} />
       <Content title="Ingresar">
-        <LoginForm />
+        <LoginForm {...props} />
       </Content>
       <Footer />
     </>

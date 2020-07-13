@@ -16,16 +16,7 @@ export default class LoginForm extends React.Component {
   };
 
   doLogin = (event) => {
-    const { email, password } = this.state.loginData;
-    const emailError = !validateEmail(email);
-    const passwordError = !validatePassword(password, email);
-
-    this.setState({
-      errors: {
-        email: emailError,
-        password: passwordError
-      }
-    });
+    this.props.history.push('/register');
 
     event.preventDefault();
   }
