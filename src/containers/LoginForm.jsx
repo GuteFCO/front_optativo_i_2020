@@ -1,6 +1,7 @@
 import React from 'react';
 import InputLine from '../components/InputLine';
 import { validatePassword, validateEmail } from '../utils/validations';
+import { login } from '../api';
 
 
 export default class LoginForm extends React.Component {
@@ -16,9 +17,16 @@ export default class LoginForm extends React.Component {
   };
 
   doLogin = (event) => {
-    this.props.history.push('/register');
-
     event.preventDefault();
+
+    login(this.state.loginData)
+      .then(response => {
+        return response.text();
+      })
+      .then(token => {
+        localStorage.setItem('token', token);
+        this.props.history.push('/deliveries');
+      });
   }
 
   onChange = (name, event) => {
